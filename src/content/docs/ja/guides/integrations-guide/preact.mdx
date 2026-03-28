@@ -6,7 +6,7 @@ sidebar:
   label: Preact
 githubIntegrationURL: 'https://github.com/withastro/astro/tree/main/packages/integrations/preact/'
 category: renderer
-i18nReady: false
+i18nReady: true
 ---
 
 import PackageManagerTabs from '~/components/tabs/PackageManagerTabs.astro'
@@ -173,6 +173,33 @@ Reactコンポーネントライブラリをインポートする場合、`react
 現在、`compat`オプションは、ESMとしてコードをエクスポートするReactライブラリでのみ機能します。ビルド時にエラーが発生した場合は、`astro.config.mjs`ファイルの`vite.ssr.noExternal: ['the-react-library']`にライブラリを追加してみてください。
 :::
 
+### `babel`
+
+<p>
+
+**Type:** [`BabelOptions`](https://github.com/preactjs/preset-vite#babel-configuration)<br />
+<Since pkg="@astrojs/preact" v="5.1.0" />
+</p>
+
+追加の[Babelの設定オプション](https://babeljs.io/docs/options)をPreactのViteプラグインに渡せます。Preactコンポーネントに適用されるBabelの変換をカスタマイズできます。
+
+たとえば、次の設定はPreactコンポーネントを処理するときにBabelに`.babelrc`を読み込ませます。
+
+```js title="astro.config.mjs"
+import { defineConfig } from 'astro/config';
+import preact from '@astrojs/preact';
+
+export default defineConfig({
+  integrations: [
+    preact({
+      babel: {
+        babelrc: true,
+      },
+    }),
+  ],
+});
+```
+
 ### `devtools`
 
 <p>
@@ -235,4 +262,4 @@ export default defineConfig({
 
 [astro-integration]: /ja/guides/integrations/
 
-[astro-ui-frameworks]: /ja/guides/framework-components/
+[astro-ui-frameworks]: /ja/guides/framework-components/#フレームワークコンポーネントの使用
